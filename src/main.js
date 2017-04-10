@@ -1,4 +1,14 @@
+import React from 'react'
+import { render } from 'react-dom'
 
-const name = "Katya";
+class App extends React.Component {
+  render () {
+    return (
+      <div>
+        <h1>App Component</h1>
+      </div>
+    )
+  }
+}
 
-console.log(`Hello!!! ${name}`);
+render(<App />, document.getElementById('app'))
