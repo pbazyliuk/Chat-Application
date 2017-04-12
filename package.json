@@ -2,9 +2,9 @@
   "name": "chat-app-react",
   "version": "1.0.0",
   "description": "This is just simple chat application...",
-  "main": "main.js",
+  "main": "main.jsx",
   "scripts": {
-    "lint": "eslint src/**/*.js src/**/*.jsx webpack.config.js", 
+    "lint": "eslint src/**/*.jsx src/**/*.jsx webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "dev": "webpack-dev-server --progress --inline",
@@ -13,8 +13,11 @@
   "author": "Pavlo Bazyliuk p.bazyliuk@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "moment": "^2.18.1",
     "react": "^15.5.3",
-    "react-dom": "^15.5.3"
+    "react-dom": "^15.5.3",
+    "react-router": "^4.1.0",
+    "react-router-dom": "^4.1.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",

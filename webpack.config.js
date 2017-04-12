@@ -2,13 +2,14 @@ const path = require('path')
 
 module.exports = {
   context: __dirname,
-  entry: './src/main.js',
+  entry: './src/main.jsx',
   output: {
     path: path.join(__dirname, './public/build'),
     filename: 'bundle.js'
   },
   devServer: {
-    publicPath: '/public/'
+    publicPath: '/public/',
+    historyApiFallback: true
   },
   devtool: 'eval',
   resolve: {
@@ -32,10 +33,18 @@ module.exports = {
         loader: 'babel-loader',
         exclude: [/node_modules/, /public/]
       },
+
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!autoprefixer-loader',
-        exclude: [/node_modules/, /public/]
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false
+            }
+          }
+        ]
       },
       {
         test: /\.gif$/,
@@ -55,7 +64,7 @@ module.exports = {
       },
       {
         test: /\.jsx$/,
-        loader: 'react-hot!babel-loader',
+        loader: 'babel-loader',
         exclude: [/node_modules/, /public/]
       },
       {

@@ -1,0 +1,620 @@
+body {  
+    margin: 0;
+    padding: 0;
+    background: grey;
+    /*height: 100%;*/
+    font-family: 'Open Sans', Arial, 'sans-serif'; 
+    /*300 14px/20px 'open sans'*/
+    font-size: 14px;
+}
+
+input:focus, [contenteditable="true"] {
+    outline: none;
+}
+
+/* ==== NAVBAR ==== */
+
+.navbar {
+    background-color: #3b3e99;
+    padding: 0 75px;
+    height: 60px;
+    /*margin-bottom: 5px;*/
+}
+
+.navbar__logo-container {
+    float: left;
+    height: 60px;
+}
+
+.navbar__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  
+    line-height: 60px;
+}
+
+.navbar__menu-item {
+    display: inline-block;
+    
+}
+
+.navbar__menu-link {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    margin-left: 75px;
+}
+
+.navbar__menu-item:last-child .navbar__menu-link {
+    margin-right: 0;
+}
+
+.menu-list li a:hover {
+    color: #989AD7;
+}
+
+.active {
+    font-weight: 600;
+}
+
+
+/* ==== Login Form ==== */
+
+.form__wrapper {
+    background: #fff;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: calc((100vh - 60px - 495px)/2);
+    min-height: 410px;
+    padding: 32px;
+    position: relative;
+    width: 480px;
+}
+
+.form-sign-in__header {
+    font-family: "Open Sans", "Arial", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    height: 45px;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #989ad7;
+    color: white;
+    line-height: 45px;
+    margin: 13px 0 28px;
+}
+
+.form-sign-in {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-sign-in__label {
+    font-family: "Open Sans", "Arial", sans-serif;
+    display: inline-block;
+    font-weight: 500;
+    color: #3b3e99;
+    margin-bottom: 8px;
+}
+
+.form-sign-in__input-field {
+    border: 1px solid #989ad7;
+    box-sizing: border-box;
+    height: 32px;
+    padding: 0 10px;
+    width: 100%;
+    font-family: "Open Sans", "Arial", sans-serif;
+    
+}
+
+.form-sign-in__btn-login:disabled  {
+    background-color: grey;
+    border: white;
+    color: #fff;
+    cursor: not-allowed;
+    font-family: "Open Sans", "Arial", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    height: 45px;
+    margin-top: 32px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.form-sign-in__btn-login {
+    background-color: #3b3e99;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Open Sans", "Arial", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    height: 45px;
+     margin-top: 32px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.form-sign-in__btn-login:not(:disabled):hover {
+    font-weight: 400;
+}
+
+
+::-webkit-input-placeholder {
+    color: #989ad7;
+}
+
+:-moz-placeholder {
+    color: #989ad7;
+}
+
+::-moz-placeholder {
+    color: #989ad7;
+}
+
+:-ms-input-placeholder {
+    color: #989ad7;
+}
+
+.social-icons-content {
+    font-size: 0;
+    margin-top: 32px;
+    margin-bottom: 13px;
+    text-align: center;
+}
+
+.social-icons-content__link {
+    margin-right: 32px;
+}
+
+.social-icons-content__link:last-child {
+    margin-right: 0;
+}
+
+.social-icons-content__fb-icon-active,
+.social-icons-content__fb-icon,
+.social-icons-content__g-icon-active,
+.social-icons-content__g-icon,
+.social-icons-content__tw-icon-active,
+.social-icons-content__tw-icon {
+    background: url('../../../assets/img/icon-sprite.png') no-repeat;
+    display: inline-block;
+    overflow: hidden;
+    text-align: left;
+    text-indent: -9999px;
+}
+
+.social-icons-content__fb-icon:hover {
+    background-position: -10px -0px;
+    height: 45px;
+    width: 45px;
+}
+
+.social-icons-content__fb-icon {
+    background-position: -65px -0px;
+    height: 45px;
+    width: 45px;
+}
+
+.social-icons-content__g-icon:hover {
+    background-position: -10px -55px;
+    height: 45px;
+    width: 45px;
+}
+
+.social-icons-content__g-icon {
+    background-position: -65px -55px;
+    height: 45px;
+    width: 45px;
+}
+
+.social-icons-content__tw-icon:hover {
+    background-position: -10px -110px;
+    height: 45px;
+    width: 45px;
+}
+
+.social-icons-content__tw-icon {
+    background-position: -65px -110px;
+    height: 45px;
+    width: 45px;
+}
+
+.form-sign-in__container {
+    position: relative;
+}
+
+
+.form-sign-in__container + 
+.form-sign-in__container {
+    margin-top: 28px;
+}
+
+.header-has-error {
+    color: lightcoral;
+}
+
+.input-has-error {
+    border: 1px solid lightcoral;
+}
+
+.text-has-error {
+    color: lightcoral;
+    position: absolute;
+    top: 62px;
+    font-size: 13px;
+    padding: 0;
+}
+
+button:focus {outline:0;}
+
+@media only screen and (max-width: 30rem) {
+    
+    body {
+        background-color: #fff;
+        display: block;
+    }
+
+    .wrapper {
+        max-height: 100vh;
+        min-width: 480px;
+    }
+
+}
+
+/* ==== Register Form ==== */
+
+.form__wrapper {
+    background: #fff;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: calc((100vh - 60px - 514px)/2);
+    min-height: 410px;
+    padding: 32px;
+    position: relative;
+    width: 480px;
+}
+
+.form-sign-up {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-sign-up__header {
+    font-family: "Open Sans", "Arial", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    height: 45px;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #989ad7;
+    color: white;
+    line-height: 45px;
+    margin: 13px 0 28px;
+}
+
+.form-sign-in__label {
+    font-family: "Open Sans", "Arial", sans-serif;
+    display: block;
+    font-weight: 500;
+    color: #3b3e99;
+    margin-bottom: 8px;
+}
+
+.form-sign-up__input-field {
+    border: 1px solid #989ad7;
+    box-sizing: border-box;
+    height: 32px;
+    
+    padding: 0 10px;
+    width: 100%;
+}
+
+.form-sign-up__container--narrow {
+    float: left;
+    width: 48%;
+}
+
+.form-sign-up__container--narrow + .form-sign-up__container--narrow {
+    float: right;
+    width: 48%;
+}
+
+.form-sign-up__btn-register:disabled {
+    background-color: grey;
+    border: white;
+    color: #fff;
+    cursor: not-allowed;
+    font-family: "Open Sans", "Arial", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    height: 45px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.form-sign-up__btn-register {
+    background-color: #3b3e99;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Open Sans", "Arial", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    height: 45px;
+    margin-bottom: 13px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.form-sign-up__btn-register:not(:disabled):hover {
+    font-weight: 400;
+}
+
+
+
+.form-sign-up__container {
+    position: relative;
+    margin-bottom: 32px;
+}
+
+.header-has-error {
+    color: lightcoral;
+}
+
+.input-has-error {
+    border: 1px solid lightcoral;
+}
+
+.text-has-error {
+    color: lightcoral;
+    position: absolute;
+    top: 62px;
+    font-size: 13px;
+    padding: 0;
+}
+
+/*.form-sign-up__container:nth-child(2) > .form-sign-up__input-field--narrow {
+    margin-left: 4%;
+}*/
+
+/*.form-sign-up__container:nth-child(2) > .error {
+    position: absolute;
+    left: unset;
+    right: 50px;
+}*/
+
+button:focus {outline:0;}
+
+::-webkit-input-placeholder {
+    color: #989ad7;
+}
+
+:-moz-placeholder {
+    color: #989ad7;
+}
+
+::-moz-placeholder {
+    color: #989ad7;
+}
+
+:-ms-input-placeholder {
+    color: #989ad7;
+}
+
+@media only screen and (max-width: 30rem) {
+    
+    body {
+        background-color: #fff;
+        display: block;
+    }
+
+    .wrapper {
+        max-height: 100vh;
+        min-width: 480px;
+    }
+
+}
+
+/* ==== Chat Container ==== */
+
+.wrapper {
+    display: flex;
+    height: 600px;
+    width: 960px;
+    align-items: center;
+    /*justify-content: center;*/
+    margin: 0 auto;
+    
+}
+
+.aside-part {
+    background-color: #3B3E99;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+    height: 500px;
+    min-width: 108px;
+    overflow: auto;
+    width: 40%; 
+}
+
+.main-part {
+  background-color: #fff;
+  max-height: 500px;
+  height: 500px;
+  overflow-y: auto;
+  width: 60%;
+}
+
+.collapseWidth {
+  width: 108px;
+  overflow: hidden;
+}
+
+.expandWidth {
+  width: calc(100% - 108px);
+}
+
+/* ==== Chat Navbar ==== */
+
+.chat-navbar {
+    display: flex;
+    padding: 24px 24px;
+    justify-content: space-between;
+    align-items: center;
+    height: 32px;
+    text-align: center;
+}
+
+.chat-navbar__btn-left-arrow {
+    color: #fff;
+    /*transition: .2s transform;*/
+}
+
+.chat-navbar__btn-left-arrow:before {
+    content: "\f053";
+    font-family: FontAwesome;
+    color: inherit;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.search-form {
+    position: relative;
+}
+
+.search-form__input {
+    background-color: lightgrey;
+    border: none;
+    border-radius: 15px;
+    height: 32px;
+    padding: 0 35px 0 15px;
+    
+}
+
+.search-form__btn-search:before {
+    content: "\f002";
+    font-family: FontAwesome;
+    font-size: 16px;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.chat-navbar__btn-bars:before {
+    content: "\f0c9";
+    font-family: FontAwesome;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.rotated {
+   transform: rotate(-90deg);
+   /*transition: .2s transform;*/
+}
+
+.centered {
+    justify-content: center;
+}
+
+.disabled {
+    pointer-events: none;
+    /*cursor: not-allowed; */
+}
+
+/* ==== Chat List ==== */
+
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.chat-list__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 60px;
+    flex-direction: row;
+    margin-bottom: 10px;
+    padding: 5px 24px;
+}
+
+.chat-list__item:hover {
+    background-color: mediumpurple;
+    cursor: pointer;
+}
+
+.chat-name__heading {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.chat-last-activity {
+    margin-left: auto;
+    background: lightgrey;
+    padding: 3px 13px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.avatar__img {
+    border-radius: 50%;
+    margin-right: 24px;
+}
+
+.activeLink {
+    background-color: purple;
+}
+
+
+/* ==== Chat Details Navbar ==== */
+
+.chat-details-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    padding: 16px 24px 34px 24px;
+}
+
+.logo {
+    margin-right: 25px;
+}
+
+.search-form {
+    position: relative;
+}
+
+.search-form__input {
+    background-color: lightgrey;
+    border: none;
+    border-radius: 15px;
+    height: 32px;
+    padding: 0 35px 0 15px;
+    
+}
+
+.search-form__btn-search:before {
+    content: "\f002";
+    font-family: FontAwesome;
+    font-size: 16px;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    color: #fff;
+    cursor: pointer;
+}
