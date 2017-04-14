@@ -1,9 +1,12 @@
 import React from 'react'
 
+
 class MessageInput extends React.Component {
   render () {
     return (
-      <h3>Message input</h3>
+       <div className="message-input" contentEditable="true" suppressContentEditableWarning={true}>
+            Type Something...
+        </div>
     )
   }
 }

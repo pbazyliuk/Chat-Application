@@ -11,7 +11,7 @@ class Register extends React.Component {
 
           <div className="form-sign-up__container">
             <div className="form-sign-up__container--narrow">
-                <label className="form-sign-in__label">Firstname</label>
+                <label className="form-sign-in__label" htmlFor="firstnameId">Firstname</label>
                 <input id="firstnameId"className="form-sign-up__input-field" type="text" placeholder="First Name (required)"
                 />                              
                 {/*<span>
@@ -25,7 +25,7 @@ class Register extends React.Component {
               </div>
 
               <div className="form-sign-up__container--narrow">
-                <label className="form-sign-in__label">Lastname</label>
+                <label className="form-sign-in__label" htmlFor="lastnameId">Lastname</label>
                 <input id="lastnameId" className="form-sign-up__input-field" type="text" placeholder="Last Name (required)"
                 />
                 {/*<span>
@@ -36,7 +36,7 @@ class Register extends React.Component {
             </div>
 
             <div className="form-sign-up__container">
-              <label className="form-sign-in__label">Email</label>
+              <label className="form-sign-in__label" htmlFor="emailId">Email</label>
               <input id="emailId" className="form-sign-up__input-field" type="text" placeholder="Email Address (required)"
               />
               {/*<span>
@@ -46,7 +46,7 @@ class Register extends React.Component {
 
             <div>
               <div className="form-sign-up__container">
-              <label className="form-sign-in__label"
+              <label className="form-sign-in__label" htmlFor="passwordId"
               >Password</label>
               <input id="passwordId" className="form-sign-up__input-field" type="password" placeholder="Password (required)"
               />
@@ -57,7 +57,7 @@ class Register extends React.Component {
             </div>
 
           <div className="form-sign-up__container">
-            <label className="form-sign-in__label">Confirm Password</label>
+            <label className="form-sign-in__label" htmlFor="confirmpasswordId">Confirm Password</label>
             <input id="confirmpasswordId" className="form-sign-up__input-field" type="password" placeholder="Confirm Password (required)"
             />
 
