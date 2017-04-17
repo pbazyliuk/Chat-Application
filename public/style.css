@@ -795,3 +795,23 @@ button:focus {outline:0;}
     flex-direction: column;
     justify-content: center;
 }
+
+/* Login Form */
+
+.active:valid {
+  box-shadow: 0 0 5px 1px green;
+}
+
+.active:invalid {
+  box-shadow: 0 0 5px 1px red;
+}
+
+.positined-left {
+    top: 65px;
+    left: 0;
+}
+
+.positined-right {
+    top: 65px;
+    right: 0;
+}

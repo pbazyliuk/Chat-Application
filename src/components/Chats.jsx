@@ -33,8 +33,6 @@ class Chats extends React.Component {
   
     
   render () {
-    console.log("update")
-    {console.log(this.state)}
 
     const collapseWidth = {
       width: '108px',
