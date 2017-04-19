@@ -7,11 +7,22 @@ class Login extends Component {
   constructor (props) {
     super(props)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.renderAlert = this.renderAlert.bind(this)
   }
   handleFormSubmit ({email, password}) {
     console.log(email, password)
     // Need to do something to log user in
     this.props.loginUser({email, password})
+  }
+
+  renderAlert () {
+    if (this.props.errorMessage) {
+      return (
+        <div className='alert'>
+          <strong>Oops! </strong>{this.props.errorMessage}
+        </div>
+      )
+    }
   }
 
   render () {
@@ -38,6 +49,7 @@ class Login extends Component {
               {...password} />
             <div className='text-has-error' id='passwordError' />
           </div>
+          {this.renderAlert()}
           <button className='form-sign-in__btn-login' type='submit'>Login</button>
         </form>
       </div>
@@ -48,10 +60,15 @@ class Login extends Component {
 Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   loginUser: PropTypes.func.isRequired,
-  fields: PropTypes.object.isRequired
+  fields: PropTypes.object.isRequired,
+  errorMessage: PropTypes.string
+}
+
+function mapStateToProps (state) {
+  return {errorMessage: state.auth.error}
 }
 
 export default reduxForm({
   form: 'login',
   fields: ['email', 'password']
-}, null, actions)(Login)
+}, mapStateToProps, actions)(Login)
