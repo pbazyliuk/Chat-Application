@@ -4,61 +4,46 @@ import ChatsList from './ChatsList'
 import ChatsDetails from './ChatsDetails'
 import ChatsMenu from './ChatsMenu'
 
-
 class Chats extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {isToggleOn: false, isMenuShown: false}
     this.handleSizeChange = this.handleSizeChange.bind(this)
     this.handleMenuShow = this.handleMenuShow.bind(this)
   }
 
-  //  componentWillMount() {
-  //   this.setState({
-  //     test: 1
-  //   });
-  // }
-
-  handleSizeChange() {
+  handleSizeChange () {
     this.setState(prevState => ({
       isToggleOn: !prevState.isToggleOn
-    }));
+    }))
   }
 
-  handleMenuShow() {
+  handleMenuShow () {
     this.setState(prevState => ({
       isMenuShown: !prevState.isMenuShown
-    }));
+    }))
   }
-  
-    
-  render () {
 
+  render () {
     const collapseWidth = {
       width: '108px',
-      overflow: 'hidden',
+      overflow: 'hidden'
     }
 
     const expandWidth = {
       width: 'calc(100% - 108px)'
     }
     return (
-      <div className="wrapper">
-
-        <aside className="aside-part" style={this.state.isToggleOn ? collapseWidth : {} }>
-          
-          <ChatsNavbar onSizeChange={this.handleSizeChange} onMenuShow={this.handleMenuShow}  data={this.state} />
-          <ChatsMenu data={this.state}/>
+      <div className='wrapper'>
+        <aside className='aside-part' style={this.state.isToggleOn ? collapseWidth : {}}>
+          <ChatsNavbar onSizeChange={this.handleSizeChange} onMenuShow={this.handleMenuShow} data={this.state} />
+          <ChatsMenu data={this.state} />
           <ChatsList data={this.state} />
         </aside>
-
-        <div className="main-part" style={this.state.isToggleOn ? expandWidth : {}}>
-         
-         <ChatsDetails/>
-
+        <div className='main-part' style={this.state.isToggleOn ? expandWidth : {}}>
+          <ChatsDetails />
         </div>
-
-    </div>
+      </div>
     )
   }
 }

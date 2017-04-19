@@ -13,13 +13,17 @@
   "author": "Pavlo Bazyliuk p.bazyliuk@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.16.1",
     "moment": "^2.18.1",
+    "prop-types": "^15.5.8",
     "react": "^15.5.3",
     "react-dom": "^15.5.3",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.0",
     "react-router-dom": "^4.1.0",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "redux-form": "^5.0.1"
   },
   "devDependencies": {
     "babel": "^6.23.0",
