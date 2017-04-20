@@ -39,7 +39,7 @@ class Login extends Component {
             <label className='form-sign-in__label' htmlFor='emailId' id='emailLabel'>Email</label>
             <input className='form-sign-in__input-field' id='emailId' type='text' name='email' placeholder='Email Address (required)'
               {...email} />
-            <div className='text-has-error' id='emailError' />
+            {email.touched && email.error && <div id='emailError' className='text-has-error'>{email.error}</div>}
           </div>
 
           <div className='form-sign-in__container'>
@@ -47,14 +47,37 @@ class Login extends Component {
             >Password</label>
             <input className='form-sign-in__input-field' id='passwordId' type='password' name='password' placeholder='Password (required)'
               {...password} />
-            <div className='text-has-error' id='passwordError' />
+            {password.touched && password.error && <div id='passwordError' className='text-has-error'>{password.error}</div>}
           </div>
           {this.renderAlert()}
-          <button className='form-sign-in__btn-login' type='submit'>Login</button>
+          <button className='form-sign-in__btn-login' type='submit' disabled={
+            !email.touched || email.error ||
+            !password.touched || password.error
+            }>Login</button>
         </form>
       </div>
     )
   }
+}
+
+function validate (formProps) {
+  const errors = {}
+  const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const PASSWORD_PATTERN = /^([a-zA-Z0-9_-]){6,12}$/
+
+  errors.email = !formProps.email
+    ? 'Please enter an email'
+    : (EMAIL_PATTERN.test(formProps.email) === true)
+      ? ''
+      : 'Please enter an valid email'
+
+  errors.password = !formProps.password
+    ? 'Please enter password'
+    : (PASSWORD_PATTERN.test(formProps.password) === true)
+      ? ''
+      : 'Password should contain from 6 to 12 characters'
+
+  return errors
 }
 
 Login.propTypes = {
@@ -70,5 +93,6 @@ function mapStateToProps (state) {
 
 export default reduxForm({
   form: 'login',
-  fields: ['email', 'password']
+  fields: ['email', 'password'],
+  validate
 }, mapStateToProps, actions)(Login)

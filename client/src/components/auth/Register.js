@@ -1,136 +1,45 @@
 import React from 'react'
+import { reduxForm } from 'redux-form'
+import PropTypes from 'prop-types'
+import * as actions from '../../actions'
 
 class Register extends React.Component {
   constructor (props) {
     super(props)
-
-    this.state = {
-      firstname: '',
-      firstnameValid: false,
-      lastname: '',
-      lastnameValid: false,
-      email: '',
-      emailValid: false,
-      password: '',
-      passwordValid: false,
-      passwordConfirm: '',
-      passwordConfirmValid: false
-    }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
-
-  handleChange (e) {
-    e.target.classList.add('active')
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-    this.showInputError(e.target.name)
+  handleFormSubmit ({firstname, lastname, email, password, passwordConfirm}) {
+    console.log(firstname, lastname, email, password, passwordConfirm)
+    // Need to do something to register user
   }
-
-  showInputError (refName) {
-    const validity = this.refs[refName].validity
-    const label = document.getElementById(`${refName}Label`).textContent
-    const error = document.getElementById(`${refName}Error`)
-
-    const isFirstname = refName.indexOf('firstname') !== -1
-    const isLastname = refName.indexOf('lastname') !== -1
-    const isEmail = refName.indexOf('email') !== -1
-    const isPassword = refName.indexOf('password') !== -1
-    const isPasswordConfirm = refName.indexOf('passwordConfirm') !== -1
-
-    if (isPasswordConfirm) {
-      if (this.refs.password.value !== this.refs.passwordConfirm.value) {
-        this.setState({[`${refName}Valid`]: false})
-        this.refs.passwordConfirm.setCustomValidity('Passwords do not match')
-      } else {
-        this.refs.passwordConfirm.setCustomValidity('')
-      }
-    }
-
-    if (!validity.valid) {
-      if (validity.valueMissing) {
-        error.textContent = `${label} is a required field`
-      } else if (isFirstname && validity.patternMismatch) {
-        error.textContent = `${label} minimum 3 characters`
-      } else if (isLastname && validity.patternMismatch) {
-        error.textContent = `${label} minimum 3 characters`
-      } else if (isEmail && validity.patternMismatch) {
-        error.textContent = `${label} should be a valid email address`
-      } else if (isPassword && validity.patternMismatch) {
-        error.textContent = `${label} should be longer than 6 chars`
-      } else if (isPasswordConfirm && validity.customError) {
-        error.textContent = 'Passwords do not match'
-      }
-
-      this.setState({
-        [`${refName}Valid`]: false
-      })
-      return false
-    }
-
-    error.textContent = ''
-
-    this.setState({
-      [`${refName}Valid`]: true
-    })
-    return true
-  }
-
-  handleSubmit (e) {
-    e.preventDefault()
-
-    for (let key in this.state) {
-      if (key.indexOf('Valid') !== -1 || key.indexOf('Confirm') !== -1) {
-        delete this.state[key]
-      }
-    }
-    console.log('component state', JSON.stringify(this.state))
-  }
-
   render () {
+    const {handleSubmit, fields: {firstname, lastname, email, password, passwordConfirm}} = this.props
     return (
       <div className='form__wrapper'>
-        <form action='' className='form-sign-up'>
+        <form action='' className='form-sign-up' onSubmit={handleSubmit(this.handleFormSubmit)}>
           <h3 className='form-sign-up__header'>Sign Up</h3>
 
           <div className='form-sign-up__container'>
             <div className='form-sign-up__container--narrow'>
               <label className='form-sign-in__label' htmlFor='firstnameId' id='firstnameLabel'>Firstname</label>
               <input id='firstnameId'className='form-sign-up__input-field' type='text' name='firstname' placeholder='First Name (required)'
-                value={this.state.firstname}
-                ref='firstname'
-                pattern='.{3,}'
-                required
-                onChange={this.handleChange}
-              />
-              <span><span id='firstnameError' className='text-has-error positined-left' /></span>
+                {...firstname} />
+              <span>{firstname.touched && firstname.error && <span id='firstnameError' className='text-has-error positined-left'>{firstname.error}</span>}</span>
             </div>
 
             <div className='form-sign-up__container--narrow'>
               <label className='form-sign-in__label' htmlFor='lastnameId' id='lastnameLabel'>Lastname</label>
               <input id='lastnameId' className='form-sign-up__input-field' name='lastname' type='text' placeholder='Last Name (required)'
-                value={this.state.lastname}
-                ref='lastname'
-                pattern='.{3,}'
-                required
-                onChange={this.handleChange}
-              />
-              <span id='lastnameError' className='text-has-error positined-right' />
+                {...lastname} />
+              <span>{lastname.touched && lastname.error && <span id='firstnameError' className='text-has-error positined-right'>{lastname.error}</span>}</span>
             </div>
           </div>
 
           <div className='form-sign-up__container'>
             <label className='form-sign-in__label' htmlFor='emailId' id='emailLabel'>Email</label>
             <input id='emailId' className='form-sign-up__input-field' type='text' name='email' placeholder='Email Address (required)'
-              pattern='[^@]+@[^@]+\.[a-zA-Z]{2,}'
-              value={this.state.email}
-              ref='email'
-              required
-              onChange={this.handleChange}
-            />
-            <div id='emailError' className='text-has-error' />
+              {...email} />
+            {email.touched && email.error && <div id='emailError' className='text-has-error'>{email.error}</div>}
           </div>
 
           <div>
@@ -138,41 +47,81 @@ class Register extends React.Component {
               <label className='form-sign-in__label' htmlFor='passwordId' id='passwordLabel'
               >Password</label>
               <input id='passwordId' className='form-sign-up__input-field' type='password' name='password' placeholder='Password (required)'
-                value={this.state.password}
-                ref='password'
-                pattern='.{6,}'
-                required
-                onChange={this.handleChange}
-              />
-              <div id='passwordError' className='text-has-error' />
+                {...password} />
+              {password.touched && password.error && <div id='passwordError' className='text-has-error'>{password.error}</div>}
             </div>
 
             <div className='form-sign-up__container'>
               <label className='form-sign-in__label' htmlFor='confirmpasswordId' id='passwordConfirmLabel'>Confirm Password</label>
               <input id='confirmpasswordId' className='form-sign-up__input-field' type='password' name='passwordConfirm' placeholder='Confirm Password (required)'
-                value={this.state.passwordConfirm}
-                ref='passwordConfirm'
-                pattern='.{6,}'
-                required
-                onChange={this.handleChange}
-              />
-              <div id='passwordConfirmError' className='text-has-error' />
+                {...passwordConfirm} />
+              {passwordConfirm.touched && passwordConfirm.error && <div id='passwordConfirmError' className='text-has-error'>{passwordConfirm.error}</div>}
             </div>
           </div>
 
-          <button className='form-sign-up__btn-register' type='submit'
-            onClick={this.handleSubmit}
-            disabled={
-            !this.state.emailValid ||
-            !this.state.passwordValid ||
-            !this.state.firstname ||
-            !this.state.lastname ||
-            !this.state.passwordConfirmValid}
-        >Get Started</button>
+          <button type='submit' disabled={
+            !firstname.touched || firstname.error ||
+            !lastname.touched || lastname.error ||
+            !email.touched || email.error ||
+            !password.touched || password.error ||
+            !passwordConfirm.touched || passwordConfirm.error
+            } className='form-sign-up__btn-register'>Get Started</button>
         </form>
       </div>
     )
   }
 }
 
-export default Register
+function validate (formProps) {
+  const errors = {}
+  const NAME_PATTERN = /^([a-zA-Z_-]){3,12}$/
+  const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const PASSWORD_PATTERN = /^([a-zA-Z0-9_-]){6,12}$/
+
+  errors.firstname = !formProps.firstname
+  ? 'Please enter firstname'
+  : (NAME_PATTERN.test(formProps.firstname) === true)
+    ? ''
+    : 'Between 3 to 12 latin letters'
+
+  errors.lastname = !formProps.lastname
+  ? 'Please enter lastname'
+  : (NAME_PATTERN.test(formProps.lastname) === true)
+    ? ''
+    : 'Between 3 to 12 latin letters'
+
+  errors.email = !formProps.email
+    ? 'Please enter an email'
+    : (EMAIL_PATTERN.test(formProps.email) === true)
+      ? ''
+      : 'Please enter an valid email'
+
+  errors.password = !formProps.password
+    ? 'Please enter password'
+    : (PASSWORD_PATTERN.test(formProps.password) === true)
+      ? ''
+      : 'Password should contain from 6 to 12 characters'
+
+  errors.passwordConfirm = !formProps.passwordConfirm
+    ? 'Please enter confirm password'
+    : (PASSWORD_PATTERN.test(formProps.passwordConfirm) === true)
+      ? ''
+      : 'Confirm Password should contain from 6 to 12 characters'
+
+  if (formProps.password !== formProps.passwordConfirm && formProps.password && formProps.passwordConfirm) {
+    errors.password = 'Passwords must match'
+  }
+
+  return errors
+}
+
+Register.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired
+}
+
+export default reduxForm({
+  form: 'register',
+  fields: ['firstname', 'lastname', 'email', 'password', 'passwordConfirm'],
+  validate
+}, null, actions)(Register)
