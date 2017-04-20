@@ -1,10 +1,29 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import '../../public/normalize.css'
 import '../../public/style.css'
 
 class Navbar extends React.Component {
+  constructor (props) {
+    super(props)
+    this.renderLinks = this.renderLinks.bind(this)
+  }
+  renderLinks () {
+    console.log(this.props.authenticated)
+    if (this.props.authenticated) {
+      return (
+        <li className='navbar__menu-item'><Link className='navbar__menu-link' to='/logout'>Logout</Link></li>
+      )
+    } else {
+      return [
+        <li key={1} className='navbar__menu-item'><Link className='navbar__menu-link' to='/login'>Login</Link></li>,
+        <li key={2} className='navbar__menu-item'><Link className='navbar__menu-link' to='/register'>Register</Link></li>
+      ]
+    }
+  }
   render () {
     return (
       <nav className='navbar'>
@@ -16,12 +35,21 @@ class Navbar extends React.Component {
         <ul className='navbar__menu'>
           <li className='navbar__menu-item'><Link className='navbar__menu-link' to='/'>Home</Link></li>
           <li className='navbar__menu-item'><Link className='navbar__menu-link' to='/chats'>Chat</Link></li>
-          <li className='navbar__menu-item'><Link className='navbar__menu-link' to='/login'>Login</Link></li>
-          <li className='navbar__menu-item'><Link className='navbar__menu-link' to='/register'>Register</Link></li>
+          {this.renderLinks()}
         </ul>
       </nav>
     )
   }
 }
 
-export default Navbar
+function mapStateToprops (state) {
+  return {
+    authenticated: state.auth.authenticated
+  }
+}
+
+Navbar.propTypes = {
+  authenticated: PropTypes.bool
+}
+
+export default connect(mapStateToprops)(Navbar)

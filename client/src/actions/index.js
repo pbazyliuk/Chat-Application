@@ -2,6 +2,7 @@ import axios from 'axios'
 import createHistory from 'history/createBrowserHistory'
 import {
   AUTH_USER,
+  UNAUTH_USER,
   AUTH_ERROR
 } from './types'
 
@@ -36,4 +37,9 @@ export function authError (error) {
     type: AUTH_ERROR,
     payload: error
   }
+}
+
+export function logoutUser () {
+  localStorage.removeItem('token')
+  return {type: UNAUTH_USER}
 }
