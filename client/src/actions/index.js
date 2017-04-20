@@ -6,8 +6,8 @@ import {
   AUTH_ERROR
 } from './types'
 
-const history = createHistory()
 const ROOT_URL = 'http://localhost:8090'
+const history = createHistory()
 
 export function loginUser ({ email, password }) {
   return function (dispatch) {
@@ -28,6 +28,22 @@ export function loginUser ({ email, password }) {
         // If request is bad...
         // - Show an error to the user
         dispatch(authError('Bad Login Info'))
+      })
+  }
+}
+
+export function registerUser ({firstname, lastname, email, password}) {
+  return function (dispatch) {
+    axios.post(`${ROOT_URL}/register`, {firstname, lastname, email, password})
+      .then(response => {
+        dispatch({type: AUTH_USER})
+        localStorage.setItem('token', response.data.token)
+        history.push('/chats')
+      })
+      .catch(() => {
+        // If request is bad...
+        // - Show an error to the user
+        dispatch(authError('Bad Register Info'))
       })
   }
 }

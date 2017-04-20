@@ -24,7 +24,6 @@ class Login extends Component {
       )
     }
   }
-
   render () {
     // console.log(this.props)
     const {handleSubmit, fields: {email, password}} = this.props

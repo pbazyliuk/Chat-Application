@@ -7,10 +7,21 @@ class Register extends React.Component {
   constructor (props) {
     super(props)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.renderAlert = this.renderAlert.bind(this)
   }
-  handleFormSubmit ({firstname, lastname, email, password, passwordConfirm}) {
-    console.log(firstname, lastname, email, password, passwordConfirm)
-    // Need to do something to register user
+  handleFormSubmit (formProps) {
+    console.log(formProps)
+    // Call action creator to register the user
+    this.props.registerUser(formProps)
+  }
+  renderAlert () {
+    if (this.props.errorMessage) {
+      return (
+        <div className='alert'>
+          <strong>Oops! </strong>{this.props.errorMessage}
+        </div>
+      )
+    }
   }
   render () {
     const {handleSubmit, fields: {firstname, lastname, email, password, passwordConfirm}} = this.props
@@ -58,7 +69,7 @@ class Register extends React.Component {
               {passwordConfirm.touched && passwordConfirm.error && <div id='passwordConfirmError' className='text-has-error'>{passwordConfirm.error}</div>}
             </div>
           </div>
-
+          {this.renderAlert()}
           <button type='submit' disabled={
             !firstname.touched || firstname.error ||
             !lastname.touched || lastname.error ||
@@ -117,11 +128,17 @@ function validate (formProps) {
 
 Register.propTypes = {
   fields: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string
+}
+
+function mapStateToProps (state) {
+  return {errorMessage: state.auth.error}
 }
 
 export default reduxForm({
   form: 'register',
   fields: ['firstname', 'lastname', 'email', 'password', 'passwordConfirm'],
   validate
-}, null, actions)(Register)
+}, mapStateToProps, actions)(Register)
